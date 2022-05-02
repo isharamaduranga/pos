@@ -2,7 +2,9 @@ package dao;
 
 import db.DBConnection;
 import model.CustomerDTO;
+import model.ItemDTO;
 
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -68,5 +70,21 @@ public class OrderDAOImpl {
             cusDetails.add(new CustomerDTO(id,name,address));
         }
         return cusDetails;
+    }
+
+    public ArrayList<ItemDTO> findItem(String itemCode) throws SQLException, ClassNotFoundException {
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Item WHERE code=?");
+        pstm.setString(1, itemCode + "");
+        ResultSet rst = pstm.executeQuery();
+        ArrayList<ItemDTO> itemDetails = new ArrayList<>();
+        while (rst.next()) {
+            String code = rst.getString(1);
+            String description = rst.getString(2);
+            BigDecimal unitPrice = rst.getBigDecimal(3);
+            int qtyOnHand = rst.getInt(4);
+            itemDetails.add(new ItemDTO(code,description,unitPrice,qtyOnHand));
+        }
+        return itemDetails;
     }
 }
