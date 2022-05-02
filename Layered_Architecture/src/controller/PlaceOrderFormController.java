@@ -104,14 +104,12 @@ public class PlaceOrderFormController {
 //                            "There is no such customer associated with the id " + id
                             new Alert(Alert.AlertType.ERROR, "There is no such customer associated with the id " + newValue + "").show();
                         }
-                        Connection connection = DBConnection.getDbConnection().getConnection();
-                        PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Customer WHERE id=?");
-                        pstm.setString(1, newValue + "");
-                        ResultSet rst = pstm.executeQuery();
-                        rst.next();
-                        CustomerDTO customerDTO = new CustomerDTO(newValue + "", rst.getString("name"), rst.getString("address"));
+                        OrderDAOImpl orderDAO = new OrderDAOImpl();
+                        ArrayList<CustomerDTO> cusDetails = orderDAO.searchCustomer(newValue);
 
-                        txtCustomerName.setText(customerDTO.getName());
+                        for (CustomerDTO dto : cusDetails) {
+                            txtCustomerName.setText(dto.getName());
+                        }
                     } catch (SQLException |ClassNotFoundException e) {
                         new Alert(Alert.AlertType.ERROR, "Failed to find the customer " + newValue + "" + e).show();
                     }
