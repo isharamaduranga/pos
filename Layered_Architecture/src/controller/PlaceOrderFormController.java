@@ -27,6 +27,7 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -202,16 +203,14 @@ public class PlaceOrderFormController {
         return "OID-001";
     }
 
-    private void loadAllCustomerIds() {
+   private void loadAllCustomerIds() {
         try {
-            Connection connection = DBConnection.getDbConnection().getConnection();
-            Statement stm = connection.createStatement();
-            ResultSet rst = stm.executeQuery("SELECT * FROM Customer");
 
-            while (rst.next()) {
-                cmbCustomerId.getItems().add(rst.getString("id"));
+            OrderDAOImpl orderDAO = new OrderDAOImpl();
+            ArrayList<String> allCusIds = orderDAO.loadAllCustomerIds();
+            for (String cusId : allCusIds) {
+                cmbCustomerId.getItems().add(cusId);
             }
-
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Failed to load customer ids").show();
         } catch (ClassNotFoundException e) {
