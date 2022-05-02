@@ -33,7 +33,6 @@ public class OrderDAOImpl {
         Connection connection = DBConnection.getDbConnection().getConnection();
         Statement stm = connection.createStatement();
         ResultSet rst = stm.executeQuery("SELECT * FROM Customer");
-
         ArrayList<String>allCusIds=new ArrayList<>();
 
         while (rst.next()) {
@@ -43,5 +42,16 @@ public class OrderDAOImpl {
         }
         return allCusIds;
 
+    }
+    public ArrayList<String> loadAllItemCodes() throws SQLException, ClassNotFoundException {
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        Statement stm = connection.createStatement();
+        ResultSet rst = stm.executeQuery("SELECT * FROM Item");
+        ArrayList<String> allItemCodes = new ArrayList<>();
+        while (rst.next()) {
+            String code = rst.getString(1);
+            allItemCodes.add(code);
+        }
+        return allItemCodes;
     }
 }

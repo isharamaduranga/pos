@@ -204,33 +204,29 @@ public class PlaceOrderFormController {
     }
 
    private void loadAllCustomerIds() {
+        //Load All Customer ids to ComboBox
         try {
-
             OrderDAOImpl orderDAO = new OrderDAOImpl();
             ArrayList<String> allCusIds = orderDAO.loadAllCustomerIds();
             for (String cusId : allCusIds) {
                 cmbCustomerId.getItems().add(cusId);
             }
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, "Failed to load customer ids").show();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         }
     }
 
     private void loadAllItemCodes() {
         try {
-            /*Get all items*/
-            Connection connection = DBConnection.getDbConnection().getConnection();
-            Statement stm = connection.createStatement();
-            ResultSet rst = stm.executeQuery("SELECT * FROM Item");
-            while (rst.next()) {
-                cmbItemCode.getItems().add(rst.getString("code"));
+            //Load All Items codes to ComboBox
+
+            OrderDAOImpl orderDAO = new OrderDAOImpl();
+            ArrayList<String> allItemCodes = orderDAO.loadAllItemCodes();
+            for (String allItemCode : allItemCodes) {
+                cmbItemCode.getItems().add(allItemCode);
             }
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         }
     }
 
