@@ -43,7 +43,8 @@ public class ItemDAOImpl implements ItemDao {
     @Override
     public boolean existsItem(String code) throws SQLException, ClassNotFoundException {
 
-        return SQLUtil.executeUpdate("SELECT code FROM Item WHERE code=?",code);
+        ResultSet resultSet = SQLUtil.executeQuery("SELECT code FROM Item WHERE code=?", code);
+        return resultSet.next();
     }
     @Override
     public String generateNewId() throws SQLException, ClassNotFoundException {
