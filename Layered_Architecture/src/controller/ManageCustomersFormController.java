@@ -149,10 +149,6 @@ public class ManageCustomersFormController {
                 if (existCustomer(id)) {
                     new Alert(Alert.AlertType.ERROR, id + " already exists").show();
                 }
-                //Tight Coupling
-                //No DI
-
-
 
                 dao.saveCustomer(new CustomerDTO(id,name,address));
 
@@ -170,10 +166,6 @@ public class ManageCustomersFormController {
                 if (!existCustomer(id)) {
                     new Alert(Alert.AlertType.ERROR, "There is no such customer associated with the id " + id).show();
                 }
-                //Tight Coupling
-                //No DI
-                //Boilerplate code
-
 
                 dao.updateCustomer(new CustomerDTO(id,name,address));
 
