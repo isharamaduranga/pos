@@ -2,7 +2,6 @@ package dao;
 
 import model.CustomerDTO;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -16,7 +15,7 @@ public interface CustomerDao {
 
      String generateNewId() throws SQLException, ClassNotFoundException;
 
-     ResultSet existsCustomer(String id) throws SQLException, ClassNotFoundException;
+     boolean existsCustomer(String id) throws SQLException, ClassNotFoundException;
 
      ArrayList<CustomerDTO> getAllCustomers() throws SQLException, ClassNotFoundException;
 }

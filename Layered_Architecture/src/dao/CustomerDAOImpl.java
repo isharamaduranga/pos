@@ -23,7 +23,7 @@ public class CustomerDAOImpl implements CustomerDao {
     @Override
     public boolean saveCustomer(CustomerDTO dto) throws SQLException, ClassNotFoundException {
 
-      return SQLUtil.executeUpdate("INSERT INTO Customer (id,name, address) VALUES (?,?,?)",dto.getId(),dto.getName(),dto.getAddress())
+      return SQLUtil.executeUpdate("INSERT INTO Customer (id,name, address) VALUES (?,?,?)",dto.getId(),dto.getName(),dto.getAddress());
     }
     @Override
     public boolean updateCustomer(CustomerDTO dto) throws SQLException, ClassNotFoundException {
@@ -49,9 +49,9 @@ public class CustomerDAOImpl implements CustomerDao {
         }
     }
     @Override
-    public ResultSet existsCustomer(String id) throws SQLException, ClassNotFoundException {
+    public boolean existsCustomer(String id) throws SQLException, ClassNotFoundException {
 
-        return SQLUtil.executeQuery("SELECT id FROM Customer WHERE id=?",id);
+        return SQLUtil.executeUpdate("SELECT id FROM Customer WHERE id=?",id);
 
     }
 
