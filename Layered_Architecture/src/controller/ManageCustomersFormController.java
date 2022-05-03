@@ -40,6 +40,8 @@ public class ManageCustomersFormController {
     public TableView<CustomerTM> tblCustomers;
     public JFXButton btnAddNewCustomer;
 
+    //Dependency of CustomerDao
+   private final CustomerDao dao= new CustomerDAOImpl();
     public void initialize() {
         tblCustomers.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("id"));
         tblCustomers.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -71,7 +73,7 @@ public class ManageCustomersFormController {
         tblCustomers.getItems().clear();
         /*Get all customers*/
        try {
-    CustomerDao dao= new CustomerDAOImpl();
+
            ArrayList<CustomerDTO> allCustomers1 = dao.getAllCustomers();
 
 
@@ -149,9 +151,9 @@ public class ManageCustomersFormController {
                 }
                 //Tight Coupling
                 //No DI
-                //Boilerplate code
 
-                CustomerDao dao= new CustomerDAOImpl();
+
+
                 dao.saveCustomer(new CustomerDTO(id,name,address));
 
                 tblCustomers.getItems().add(new CustomerTM(id, name, address));
@@ -172,7 +174,7 @@ public class ManageCustomersFormController {
                 //No DI
                 //Boilerplate code
 
-                CustomerDao dao= new CustomerDAOImpl();
+
                 dao.updateCustomer(new CustomerDTO(id,name,address));
 
 
@@ -193,7 +195,7 @@ public class ManageCustomersFormController {
 
 
     boolean existCustomer(String id) throws SQLException, ClassNotFoundException {
-        CustomerDao dao= new CustomerDAOImpl();
+
         return  dao.existsCustomer(id);
 
 
@@ -208,7 +210,7 @@ public class ManageCustomersFormController {
                 new Alert(Alert.AlertType.ERROR, "There is no such customer associated with the id " + id).show();
             }
 
-            CustomerDao dao= new CustomerDAOImpl();
+
             dao.deleteCustomer(id);
 
             tblCustomers.getItems().remove(tblCustomers.getSelectionModel().getSelectedItem());
@@ -224,8 +226,8 @@ public class ManageCustomersFormController {
 
     private String generateNewId() {
         try {
-            CustomerDao dao= new CustomerDAOImpl();
-         return dao.generateNewId();
+
+           return dao.generateNewId();
 
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Failed to generate a new id " + e.getMessage()).show();
