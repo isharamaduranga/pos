@@ -13,15 +13,10 @@ import java.util.ArrayList;
 public class CustomerDAOImpl implements CustomerDao {
     @Override
     public ArrayList<CustomerDTO> getAllCustomers() throws SQLException, ClassNotFoundException {
-
         ResultSet rst = SQLUtil.executeQuery("SELECT * FROM Customer");
-        ArrayList<CustomerDTO>allCustomers=new ArrayList<>();
-
-        while (rst.next()){
-            String id = rst.getString(1);
-            String name = rst.getString(2);
-            String address = rst.getString(3);
-            allCustomers.add(new CustomerDTO(id,name,address));
+        ArrayList<CustomerDTO> allCustomers = new ArrayList<>();
+        while (rst.next()) {
+            allCustomers.add(new CustomerDTO(rst.getString(1),  rst.getString(2), rst.getString(3)));
         }
         return allCustomers;
     }
@@ -42,9 +37,8 @@ public class CustomerDAOImpl implements CustomerDao {
     }
     @Override
     public String generateNewId() throws SQLException, ClassNotFoundException {
-       /* Connection connection = DBConnection.getDbConnection().getConnection();
-        ResultSet rst = connection.createStatement().executeQuery();*/
-        ResultSet set = SQLUtil.executeQuery("");
+
+        ResultSet set = SQLUtil.executeQuery("SELECT id FROM Customer ORDER BY id DESC LIMIT 1");
 
         if (set.next()) {
             String id = set.getString("id");
