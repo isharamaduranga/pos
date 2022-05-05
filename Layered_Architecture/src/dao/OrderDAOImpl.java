@@ -3,14 +3,46 @@ package dao;
 import db.DBConnection;
 import model.CustomerDTO;
 import model.ItemDTO;
+import model.OrderDTO;
 
 import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class OrderDAOImpl {
+public class OrderDAOImpl   implements CrudDao<OrderDTO,String> {
+    @Override
+    public ArrayList<OrderDTO> getAll() throws SQLException, ClassNotFoundException {
+        return null;
+    }
 
-    public boolean existItem(String code) throws SQLException, ClassNotFoundException {
+    @Override
+    public boolean save(OrderDTO dto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public boolean update(OrderDTO dto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public boolean exists(String s) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public boolean delete(String s) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public String generateNewId() throws SQLException, ClassNotFoundException {
+        return null;
+    }
+
+
+
+   /* public boolean existItem(String code) throws SQLException, ClassNotFoundException {
         Connection connection = DBConnection.getDbConnection().getConnection();
         PreparedStatement pstm = connection.prepareStatement("SELECT code FROM Item WHERE code=?");
         pstm.setString(1, code);
@@ -86,5 +118,7 @@ public class OrderDAOImpl {
             itemDetails.add(new ItemDTO(code,description,unitPrice,qtyOnHand));
         }
         return itemDetails;
-    }
+    }*/
+
+
 }

@@ -10,9 +10,13 @@ import java.util.ArrayList;
  * @since : 0.1.0
  **/
 
-public class CustomerDAOImpl implements CustomerDao {
-    @Override
-    public ArrayList<CustomerDTO> getAllCustomers() throws SQLException, ClassNotFoundException {
+public class CustomerDAOImpl implements CrudDao<CustomerDTO,String> {
+
+
+
+
+   @Override
+    public ArrayList<CustomerDTO> getAll() throws SQLException, ClassNotFoundException {
         ResultSet rst = SQLUtil.executeQuery("SELECT * FROM Customer");
         ArrayList<CustomerDTO> allCustomers = new ArrayList<>();
         while (rst.next()) {
@@ -21,17 +25,17 @@ public class CustomerDAOImpl implements CustomerDao {
         return allCustomers;
     }
     @Override
-    public boolean saveCustomer(CustomerDTO dto) throws SQLException, ClassNotFoundException {
+    public boolean save(CustomerDTO dto) throws SQLException, ClassNotFoundException {
 
       return SQLUtil.executeUpdate("INSERT INTO Customer (id,name, address) VALUES (?,?,?)",dto.getId(),dto.getName(),dto.getAddress());
     }
     @Override
-    public boolean updateCustomer(CustomerDTO dto) throws SQLException, ClassNotFoundException {
+    public boolean update(CustomerDTO dto) throws SQLException, ClassNotFoundException {
 
         return SQLUtil.executeUpdate("UPDATE Customer SET name=?, address=? WHERE id=?",dto.getName(),dto.getAddress(),dto.getId());
     }
     @Override
-    public boolean deleteCustomer(String id) throws SQLException, ClassNotFoundException {
+    public boolean delete(String id) throws SQLException, ClassNotFoundException {
 
         return SQLUtil.executeUpdate("DELETE FROM Customer WHERE id=?",id);
     }
@@ -49,7 +53,7 @@ public class CustomerDAOImpl implements CustomerDao {
         }
     }
     @Override
-    public boolean existsCustomer(String id) throws SQLException, ClassNotFoundException {
+    public boolean exists(String id) throws SQLException, ClassNotFoundException {
 
         ResultSet resultSet = SQLUtil.executeQuery("SELECT id FROM Customer WHERE id=?", id);
         return resultSet.next();

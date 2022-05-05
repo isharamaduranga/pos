@@ -2,11 +2,8 @@ package controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
-import dao.CustomerDAOImpl;
-import dao.CustomerDao;
+import dao.CrudDao;
 import dao.ItemDAOImpl;
-import dao.ItemDao;
-import db.DBConnection;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -45,7 +42,7 @@ public class ManageItemsFormController {
     public JFXButton btnAddNewItem;
 
     //Dependency of ItemDao
-    private final ItemDao dao= new ItemDAOImpl();
+    private final CrudDao<ItemDTO,String> dao= new ItemDAOImpl();
 
     public void initialize() {
         tblItems.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("code"));
@@ -83,7 +80,7 @@ public class ManageItemsFormController {
             /*Get all items*/
 
 
-            ArrayList<ItemDTO> allItems= dao.getAllItems();
+            ArrayList<ItemDTO> allItems= dao.getAll();
             for (ItemDTO item :allItems) {
                 tblItems.getItems().add(new ItemTM(item.getCode(),item.getDescription(),item.getUnitPrice(),item.getQtyOnHand()));
             }
@@ -144,7 +141,7 @@ public class ManageItemsFormController {
                 new Alert(Alert.AlertType.ERROR, "There is no such item associated with the id " + code).show();
             }
 
-            dao.deleteItem(code);
+            dao.delete(code);
 
             tblItems.getItems().remove(tblItems.getSelectionModel().getSelectedItem());
             tblItems.getSelectionModel().clearSelection();
@@ -185,7 +182,7 @@ public class ManageItemsFormController {
                 }
                 //Save Item
 
-                dao.saveItem(new ItemDTO(code,description,unitPrice,qtyOnHand));
+                dao.save(new ItemDTO(code,description,unitPrice,qtyOnHand));
 
                 tblItems.getItems().add(new ItemTM(code, description, unitPrice, qtyOnHand));
 
@@ -202,7 +199,7 @@ public class ManageItemsFormController {
                 }
                 /*Update Item*/
 
-                dao.updateItem(new ItemDTO(code,description,unitPrice,qtyOnHand));
+                dao.update(new ItemDTO(code,description,unitPrice,qtyOnHand));
 
                 ItemTM selectedItem = tblItems.getSelectionModel().getSelectedItem();
                 selectedItem.setDescription(description);
@@ -221,7 +218,7 @@ public class ManageItemsFormController {
 
 
     private boolean existItem(String code) throws SQLException, ClassNotFoundException {
-        return dao.existsItem(code);
+        return dao.exists(code);
     }
 
 

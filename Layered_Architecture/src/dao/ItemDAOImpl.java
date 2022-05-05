@@ -1,15 +1,19 @@
 package dao;
 
 import db.DBConnection;
+import model.CustomerDTO;
 import model.ItemDTO;
 
 import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class ItemDAOImpl implements ItemDao {
+public class ItemDAOImpl implements CrudDao<ItemDTO,String> {
+
+
+
     @Override
-    public ArrayList<ItemDTO> getAllItems() throws SQLException, ClassNotFoundException {
+    public ArrayList<ItemDTO> getAll() throws SQLException, ClassNotFoundException {
         ResultSet rst = SQLUtil.executeQuery("SELECT * FROM Item");
 
         ArrayList<ItemDTO>allItems=new ArrayList<>();
@@ -23,25 +27,25 @@ public class ItemDAOImpl implements ItemDao {
         return allItems;
     }
     @Override
-    public boolean deleteItem(String code) throws SQLException, ClassNotFoundException {
+    public boolean delete(String code) throws SQLException, ClassNotFoundException {
 
         return SQLUtil.executeUpdate("DELETE FROM Item WHERE code=?",code);
     }
     @Override
-    public boolean saveItem(ItemDTO dto) throws SQLException, ClassNotFoundException {
+    public boolean save(ItemDTO dto) throws SQLException, ClassNotFoundException {
 
         return SQLUtil.executeUpdate("INSERT INTO Item (code, description, unitPrice, qtyOnHand) VALUES (?,?,?,?)",
                 dto.getCode(),dto.getDescription(), dto.getUnitPrice(), dto.getQtyOnHand());
 
     }
     @Override
-    public boolean updateItem(ItemDTO dto) throws SQLException, ClassNotFoundException {
+    public boolean update(ItemDTO dto) throws SQLException, ClassNotFoundException {
 
         return SQLUtil.executeUpdate("UPDATE Item SET description=?, unitPrice=?, qtyOnHand=? WHERE code=?",
                 dto.getDescription() , dto.getUnitPrice(), dto.getQtyOnHand(), dto.getCode());
     }
     @Override
-    public boolean existsItem(String code) throws SQLException, ClassNotFoundException {
+    public boolean exists(String code) throws SQLException, ClassNotFoundException {
 
         ResultSet resultSet = SQLUtil.executeQuery("SELECT code FROM Item WHERE code=?", code);
         return resultSet.next();
