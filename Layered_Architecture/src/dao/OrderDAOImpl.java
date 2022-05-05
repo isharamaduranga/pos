@@ -26,6 +26,11 @@ public class OrderDAOImpl   implements CrudDao<OrderDTO,String> {
     }
 
     @Override
+    public OrderDTO search(String s) throws SQLException, ClassNotFoundException {
+        return null;
+    }
+
+    @Override
     public boolean exists(String s) throws SQLException, ClassNotFoundException {
         return false;
     }
@@ -39,6 +44,7 @@ public class OrderDAOImpl   implements CrudDao<OrderDTO,String> {
     public String generateNewId() throws SQLException, ClassNotFoundException {
         return null;
     }
+
 
 
 
