@@ -20,8 +20,9 @@ public class ItemDAOImpl implements CrudDao<ItemDTO,String> {
         while (rst.next()){
             String code = rst.getString(1);
             String description = rst.getString(2);
-            BigDecimal price = rst.getBigDecimal(3);
-            int qtyOnHand = rst.getInt(4);
+            int qtyOnHand = rst.getInt(3);
+            BigDecimal price = rst.getBigDecimal(4);
+            
             allItems.add(new ItemDTO(code,description,price,qtyOnHand));
         }
         return allItems;
@@ -50,7 +51,7 @@ public class ItemDAOImpl implements CrudDao<ItemDTO,String> {
 
         ResultSet rst = SQLUtil.executeQuery("SELECT * FROM Item WHERE code=?", code);
         if (rst.next()) {
-            return new ItemDTO(rst.getString(1), rst.getString(2),rst.getBigDecimal(3),rst.getInt(4) );
+            return new ItemDTO(rst.getString(1), rst.getString(2),rst.getBigDecimal(4),rst.getInt(3) );
         }
        return null;
     }
