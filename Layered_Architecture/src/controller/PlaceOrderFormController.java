@@ -110,8 +110,8 @@ public class PlaceOrderFormController {
 
 
                         CrudDao<CustomerDTO,String> customerDAO = new CustomerDAOImpl();
-                        CustomerDTO search = customerDAO.search(newValue + "");
-                        txtCustomerName.setText(search.getName());
+                        CustomerDTO customer = customerDAO.search(newValue + "");
+                        txtCustomerName.setText(customer.getName());
 
 
                     } catch (SQLException |ClassNotFoundException e) {
@@ -130,7 +130,7 @@ public class PlaceOrderFormController {
 
             if (newItemCode != null) {
 
-                /*Find Item*/
+                /*Search Item*/
                 try {
                     if (!existItem(newItemCode + "")) {
 //                        throw new NotFoundException("There is no such item associated with the id " + code);
@@ -176,7 +176,7 @@ public class PlaceOrderFormController {
 
         });
 
-        loadAllCustomerIds();
+        //loadAllCustomerIds();
         loadAllItemCodes();
     }
 
@@ -186,12 +186,9 @@ public class PlaceOrderFormController {
     }
 
     boolean existCustomer(String id) throws SQLException, ClassNotFoundException {
-        Connection connection = DBConnection.getDbConnection().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("SELECT id FROM Customer WHERE id=?");
-        pstm.setString(1, id);
-        return pstm.executeQuery().next();
 
-
+        CrudDao<CustomerDTO,String> CustomerDAO = new CustomerDAOImpl();
+        return CustomerDAO.exists(id);
     }
 
     public String generateNewOrderId() {
@@ -209,22 +206,29 @@ public class PlaceOrderFormController {
         return "OID-001";
     }
 
-   private void loadAllCustomerIds() {
+  /* private void loadAllCustomerIds() {
         //Load All Customer ids to ComboBox
         try {
-            Connection connection = DBConnection.getDbConnection().getConnection();
+            *//*Connection connection = DBConnection.getDbConnection().getConnection();
             Statement stm = connection.createStatement();
             ResultSet rst = stm.executeQuery("SELECT * FROM Customer");
 
             while (rst.next()) {
-                cmbCustomerId.getItems().add(rst.getString("id"));
+
+            }*//*
+
+            CrudDao<CustomerDTO,String> customerDao=new CustomerDAOImpl();
+            ArrayList<CustomerDTO> all = customerDao.getAll();
+
+            for (CustomerDTO customerDTO : all) {
+                cmbCustomerId.getItems().add(customerDTO.getString("id"));
             }
 
 
         } catch (SQLException | ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, "Failed to load customer ids").show();
         }
-    }
+    }*/
 
     private void loadAllItemCodes() {
         try {
