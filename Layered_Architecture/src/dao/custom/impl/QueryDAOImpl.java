@@ -20,22 +20,9 @@ public class QueryDAOImpl implements QueryDAO {
         ArrayList<CustomDTO> orderRecords = new ArrayList();
 
         while (rst.next()) {
-            String oid=rst.getString(1);
-            String date = rst.getString(2);
-            String customerID = rst.getString(3);
-            String itemCode = rst.getString(4);
-            int qty = rst.getInt(5);
-            BigDecimal unitPrice = rst.getBigDecimal(6);
 
-            CustomDTO customDTO = new CustomDTO();
-            customDTO.setOid(oid);
-            customDTO.setOrderDate(LocalDate.now());
-            customDTO.setCustomerId(customerID);
-            customDTO.setItemCode(itemCode);
-            customDTO.setQty(qty);
-            customDTO.setUnitPrice(unitPrice);
-
-            orderRecords.add(customDTO);
+            orderRecords.add(new CustomDTO(rst.getString(1),LocalDate.parse(rst.getString(2)),
+                    rst.getString(3),rst.getString(4),rst.getInt(5),rst.getBigDecimal(6)));
 
         }
         return orderRecords;
