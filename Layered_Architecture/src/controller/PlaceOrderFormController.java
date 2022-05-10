@@ -3,7 +3,14 @@ package controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import dao.*;
+import dao.custom.CustomerDAO;
+import dao.custom.ItemDAO;
+import dao.custom.OrderDAO;
+import dao.custom.OrderDetailsDAO;
+import dao.custom.impl.CustomerDAOImpl;
+import dao.custom.impl.ItemDAOImpl;
+import dao.custom.impl.OrderDAOImpl;
+import dao.custom.impl.OrderDetailsDAOImpl;
 import db.DBConnection;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -57,10 +64,10 @@ public class PlaceOrderFormController {
     private String orderId;
 
     /** Apply Dependency Property Injection For this class */
-    private final CrudDao<CustomerDTO,String> customerDAO = new CustomerDAOImpl();
-    private final CrudDao<ItemDTO, String> itemDAO = new ItemDAOImpl();
-    private final CrudDao<OrderDTO,String> orderDao = new OrderDAOImpl();
-    private final CrudDao<OrderDetailDTO,String> orderDetailDao= new OrderDetailsDAOImpl();
+    private final CustomerDAO customerDAO = new CustomerDAOImpl();
+    private final ItemDAO itemDAO = new ItemDAOImpl();
+    private final OrderDAO orderDao = new OrderDAOImpl();
+    private final OrderDetailsDAO orderDetailDao= new OrderDetailsDAOImpl();
 
     public void initialize()  {
 

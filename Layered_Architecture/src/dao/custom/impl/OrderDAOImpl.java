@@ -1,16 +1,15 @@
-package dao;
+package dao.custom.impl;
 
-import db.DBConnection;
-import model.CustomerDTO;
-import model.ItemDTO;
+import dao.SQLUtil;
+import dao.custom.OrderDAO;
 import model.OrderDTO;
 
-import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 
 public class OrderDAOImpl   implements OrderDAO {
-   /* @Override
+
+   @Override
     public ArrayList<OrderDTO> getAll() throws SQLException, ClassNotFoundException {
         return null;
     }
@@ -50,5 +49,5 @@ public class OrderDAOImpl   implements OrderDAO {
         ResultSet rst = SQLUtil.executeQuery("SELECT oid FROM `Orders` ORDER BY oid DESC LIMIT 1;");
         return rst.next() ? String.format("OID-%03d", (Integer.parseInt(rst.getString("oid").replace("OID-", "")) + 1)) : "OID-001";
 
-    }*/
+    }
 }
