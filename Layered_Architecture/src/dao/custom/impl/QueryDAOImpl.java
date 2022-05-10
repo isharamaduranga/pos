@@ -13,9 +13,8 @@ import java.util.ArrayList;
 public class QueryDAOImpl implements QueryDAO {
     public ArrayList<CustomDTO> searchOrderByOrderID(String  id)throws SQLException, ClassNotFoundException{
 
-     String sql="select Orders.oid,Orders.date,Orders.customerID,OrderDetails.itemCode,OrderDetails.qty,OrderDetails." +
-          "unitPrice from Orders inner join OrderDetails on Orders.oid=OrderDetails.oid where Orders.oid=\"OID-001\";";
-        ResultSet rst = SQLUtil.executeQuery(sql, id);
+        ResultSet rst = SQLUtil.executeQuery("select Orders.oid,Orders.date,Orders.customerID,OrderDetails.itemCode,OrderDetails.qty,OrderDetails." +
+                "unitPrice from Orders inner join OrderDetails on Orders.oid=OrderDetails.oid where Orders.oid=\"OID-001\";", id);
 
         ArrayList<CustomDTO> orderRecords = new ArrayList();
 
