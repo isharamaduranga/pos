@@ -57,10 +57,10 @@ public class PlaceOrderFormController {
     private String orderId;
 
     /** Apply Dependency Property Injection For this class */
-    CrudDao<CustomerDTO,String> customerDAO = new CustomerDAOImpl();
-    CrudDao<ItemDTO, String> itemDAO = new ItemDAOImpl();
-    CrudDao<OrderDTO,String> orderDao = new OrderDAOImpl();
-    CrudDao<OrderDetailDTO,String> orderDetailDao= new OrderDetailsDAOImpl();
+    private final CrudDao<CustomerDTO,String> customerDAO = new CustomerDAOImpl();
+    private final CrudDao<ItemDTO, String> itemDAO = new ItemDAOImpl();
+    private final CrudDao<OrderDTO,String> orderDao = new OrderDAOImpl();
+    private final CrudDao<OrderDetailDTO,String> orderDetailDao= new OrderDetailsDAOImpl();
 
     public void initialize()  {
 
@@ -124,7 +124,7 @@ public class PlaceOrderFormController {
                 txtCustomerName.clear();
             }
         });
-        
+
         cmbItemCode.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newItemCode) -> {
             txtQty.setEditable(newItemCode != null);
             btnSave.setDisable(newItemCode == null);

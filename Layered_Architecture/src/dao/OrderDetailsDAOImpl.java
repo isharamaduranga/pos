@@ -6,10 +6,10 @@ import model.OrderDetailDTO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class OrderDetailsDAOImpl implements CrudDao<OrderDetailDTO,String> {
+public class OrderDetailsDAOImpl implements OrderDetailsDAO {
 
 
-    @Override
+   /* @Override
     public ArrayList<OrderDetailDTO> getAll() throws SQLException, ClassNotFoundException {
         return null;
     }
@@ -44,5 +44,5 @@ public class OrderDetailsDAOImpl implements CrudDao<OrderDetailDTO,String> {
     @Override
     public String generateNewId() throws SQLException, ClassNotFoundException {
         return null;
-    }
+    }*/
 }

@@ -8,9 +8,48 @@ import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class ItemDAOImpl implements CrudDao<ItemDTO,String> {
+public class ItemDAOImpl implements ItemDAO {
+    @Override
+    public ArrayList<ItemDTO> getAll() throws SQLException, ClassNotFoundException {
+        return null;
+    }
 
+    @Override
+    public boolean save(ItemDTO dto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
 
+    @Override
+    public boolean update(ItemDTO dto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public ItemDTO search(String s) throws SQLException, ClassNotFoundException {
+        return null;
+    }
+
+    @Override
+    public boolean exists(String s) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public boolean delete(String s) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public String generateNewId() throws SQLException, ClassNotFoundException {
+        return null;
+    }
+
+    @Override
+    public ArrayList<ItemDTO> getAllItemByPrice(double price) throws SQLException, ClassNotFoundException {
+        return null;
+    }
+
+/*
 
     @Override
     public ArrayList<ItemDTO> getAll() throws SQLException, ClassNotFoundException {
@@ -74,5 +113,5 @@ public class ItemDAOImpl implements CrudDao<ItemDTO,String> {
         } else {
             return "I00-001";
         }
-    }
+    }*/
 }
