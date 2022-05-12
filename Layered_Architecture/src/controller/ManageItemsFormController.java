@@ -226,10 +226,8 @@ public class ManageItemsFormController {
 
     }
 
-
     private String generateNewId() {
         try {
-
             return itemBO.generateNewItemID();
 
         } catch (SQLException e) {
@@ -238,6 +236,5 @@ public class ManageItemsFormController {
             e.printStackTrace();
         }
         return "I00-001";
-
     }
 }
