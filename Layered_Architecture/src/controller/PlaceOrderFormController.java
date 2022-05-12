@@ -59,11 +59,6 @@ public class PlaceOrderFormController {
     private String orderId;
 
     /** Apply Dependency Property Injection For this class */
-   /* private final CustomerDAO customerDAO = new CustomerDAOImpl();
-    private final ItemDAO itemDAO = new ItemDAOImpl();
-    private final OrderDAO orderDao = new OrderDAOImpl();
-    private final OrderDetailsDAO orderDetailDao= new OrderDetailsDAOImpl();
-    private final QueryDAO queryDAO = new QueryDAOImpl();*/
 
     public void initialize()  {
 
