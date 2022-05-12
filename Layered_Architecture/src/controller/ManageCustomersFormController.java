@@ -42,7 +42,7 @@ public class ManageCustomersFormController {
     public TableView<CustomerTM> tblCustomers;
     public JFXButton btnAddNewCustomer;
 
-    //Dependency of CrudDao
+    CustomerBOImpl customerBO=new CustomerBOImpl();
 
     public void initialize() {
 
@@ -76,7 +76,7 @@ public class ManageCustomersFormController {
         tblCustomers.getItems().clear();
         /*Get all customers*/
        try {
-           CustomerBOImpl customerBO=new CustomerBOImpl();
+
            ArrayList<CustomerDTO> allCustomers = customerBO.getAllCustomers();
 
             for (CustomerDTO customer : allCustomers) {
@@ -151,7 +151,7 @@ public class ManageCustomersFormController {
                 if (existCustomer(id)) {
                     new Alert(Alert.AlertType.ERROR, id + " already exists").show();
                 }
-                CustomerBOImpl customerBO=new CustomerBOImpl();
+
                 customerBO.saveCustomer(new CustomerDTO(id,name,address));
 
                 tblCustomers.getItems().add(new CustomerTM(id, name, address));
@@ -169,7 +169,7 @@ public class ManageCustomersFormController {
                     new Alert(Alert.AlertType.ERROR, "There is no such customer associated with the id " + id).show();
                 }
 
-                CustomerBOImpl customerBO=new CustomerBOImpl();
+
                 customerBO.updateCustomer(new CustomerDTO(id,name,address));
 
 
@@ -192,7 +192,7 @@ public class ManageCustomersFormController {
 
     boolean existCustomer(String id) throws SQLException, ClassNotFoundException {
 
-        CustomerBOImpl customerBO=new CustomerBOImpl();
+
        return customerBO.customerExist(id);
 
     }
@@ -206,7 +206,7 @@ public class ManageCustomersFormController {
                 new Alert(Alert.AlertType.ERROR, "There is no such customer associated with the id " + id).show();
             }
 
-            CustomerBOImpl customerBO=new CustomerBOImpl();
+
             customerBO.deleteCustomer(id);
 
 
@@ -223,7 +223,7 @@ public class ManageCustomersFormController {
 
     private String generateNewId() {
         try {
-            CustomerBOImpl customerBO=new CustomerBOImpl();
+
            return customerBO.generateNewCustomerID();
 
         } catch (SQLException e) {

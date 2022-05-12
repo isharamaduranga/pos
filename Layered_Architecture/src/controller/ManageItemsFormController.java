@@ -44,7 +44,7 @@ public class ManageItemsFormController {
 
     //Dependency of ItemDao
 
-
+    ItemBOImpl itemBO = new ItemBOImpl();
     public void initialize() {
         tblItems.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("code"));
         tblItems.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -80,7 +80,7 @@ public class ManageItemsFormController {
         try {
             /*Get all items*/
 
-            ItemBOImpl itemBO = new ItemBOImpl();
+
             ArrayList<ItemDTO> allItems = itemBO.getAllItems();
 
             for (ItemDTO item :allItems) {
@@ -142,7 +142,7 @@ public class ManageItemsFormController {
             if (!existItem(code)) {
                 new Alert(Alert.AlertType.ERROR, "There is no such item associated with the id " + code).show();
             }
-            ItemBOImpl itemBO = new ItemBOImpl();
+
             itemBO.deleteItem(code);
 
             tblItems.getItems().remove(tblItems.getSelectionModel().getSelectedItem());
@@ -183,7 +183,7 @@ public class ManageItemsFormController {
                     new Alert(Alert.AlertType.ERROR, code + " already exists").show();
                 }
                 //Save Item
-                ItemBOImpl itemBO = new ItemBOImpl();
+
                 itemBO.saveItem(new ItemDTO(code,description,unitPrice,qtyOnHand));
 
 
@@ -201,7 +201,7 @@ public class ManageItemsFormController {
                     new Alert(Alert.AlertType.ERROR, "There is no such item associated with the id " + code).show();
                 }
                 /*Update Item*/
-                ItemBOImpl itemBO = new ItemBOImpl();
+
                 itemBO.updateItem(new ItemDTO(code,description,unitPrice,qtyOnHand));
 
                 ItemTM selectedItem = tblItems.getSelectionModel().getSelectedItem();
@@ -229,7 +229,7 @@ public class ManageItemsFormController {
 
     private String generateNewId() {
         try {
-            ItemBOImpl itemBO = new ItemBOImpl();
+
             return itemBO.generateNewItemID();
 
 
