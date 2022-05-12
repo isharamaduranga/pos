@@ -1,5 +1,6 @@
 package controller;
 
+import bo.ItemBO;
 import bo.ItemBOImpl;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
@@ -44,7 +45,7 @@ public class ManageItemsFormController {
 
     //Dependency of ItemDao
 
-    ItemBOImpl itemBO = new ItemBOImpl();
+    ItemBO itemBO = new ItemBOImpl();
     public void initialize() {
         tblItems.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("code"));
         tblItems.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -219,7 +220,6 @@ public class ManageItemsFormController {
         btnAddNewItem.fire();
     }
 
-
     private boolean existItem(String code) throws SQLException, ClassNotFoundException {
         ItemBOImpl itemBO = new ItemBOImpl();
         return itemBO.itemExist(code);
@@ -231,8 +231,6 @@ public class ManageItemsFormController {
         try {
 
             return itemBO.generateNewItemID();
-
-
 
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();

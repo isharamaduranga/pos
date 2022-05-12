@@ -11,4 +11,5 @@ public interface ItemDAO extends CrudDao<ItemDTO,String> {
 
     public ArrayList<ItemDTO> getAllItemByPrice(double  price)throws SQLException, ClassNotFoundException;
 
+
 }

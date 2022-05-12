@@ -2,13 +2,12 @@ package bo;
 
 import dao.custom.ItemDAO;
 import dao.custom.impl.ItemDAOImpl;
-import model.CustomerDTO;
 import model.ItemDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ItemBOImpl {
+public class ItemBOImpl implements ItemBO {
 
     private final ItemDAO dao= new ItemDAOImpl();
 
