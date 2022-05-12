@@ -1,12 +1,10 @@
 package dao;
 
-import model.CustomerDTO;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 
-public interface CrudDao<T,ID> {
+public interface CrudDao<T,ID> extends SuperDAO{
      ArrayList<T> getAll() throws SQLException, ClassNotFoundException;
 
      boolean save(T dto) throws SQLException, ClassNotFoundException;

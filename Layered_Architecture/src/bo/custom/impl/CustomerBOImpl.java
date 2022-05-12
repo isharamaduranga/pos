@@ -1,14 +1,14 @@
-package bo;
+package bo.custom.impl;
 
+import bo.custom.CustomerBO;
 import dao.custom.CustomerDAO;
 import dao.custom.impl.CustomerDAOImpl;
-import model.CustomDTO;
 import model.CustomerDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class CustomerBOImpl implements CustomerBO{
+public class CustomerBOImpl implements CustomerBO {
 
     private final CustomerDAO dao= new CustomerDAOImpl();
 
