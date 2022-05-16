@@ -1,5 +1,6 @@
 package controller;
 
+import bo.custom.BOFactory;
 import bo.custom.PurchaseOrderBO;
 import bo.custom.impl.PurchaseOrderBOImpl;
 import com.jfoenix.controls.JFXButton;
@@ -56,7 +57,7 @@ public class PlaceOrderFormController {
     private String orderId;
 
     /** Apply Dependency Property Injection For this class */
-    PurchaseOrderBO purchaseOrderBO = new PurchaseOrderBOImpl();
+    PurchaseOrderBO purchaseOrderBO = (PurchaseOrderBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.PLACEORDER);
 
     public void initialize()  {
 

@@ -13,7 +13,7 @@ public class DAOFactory {
 
     public  static DAOFactory getDaoFactory(){
         if(daoFactory==null){
-            return new DAOFactory();
+            return daoFactory = new DAOFactory();
         }
         return daoFactory;
     }

@@ -1,5 +1,6 @@
 package controller;
 
+import bo.custom.BOFactory;
 import bo.custom.ItemBO;
 import bo.custom.impl.ItemBOImpl;
 import com.jfoenix.controls.JFXButton;
@@ -42,8 +43,9 @@ public class ManageItemsFormController {
     public JFXButton btnAddNewItem;
 
     //Dependency of ItemDao
-
-    ItemBO itemBO = new ItemBOImpl();
+    /** refactored  dependency through BOFactory(Hide Object Creation Logic) */
+    ItemBO itemBO = (ItemBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.ITEM);
+    
     public void initialize() {
         tblItems.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("code"));
         tblItems.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("description"));
